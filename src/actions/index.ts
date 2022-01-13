@@ -9,9 +9,14 @@ export interface Todo {
   completed: boolean;
 }
 
-export interface FetchTodoActions {
+export interface FetchTodoAction {
   type: ActionTypes.fetchTodos;
   payload: Todo[];
+}
+
+export interface DeleteTodoAction {
+  type: ActionTypes.deleteTodo;
+  payload: number;
 }
 
 export const fetchTodos = () => {
@@ -20,9 +25,16 @@ export const fetchTodos = () => {
       "https://jsonplaceholder.typicode.com/todos"
     );
 
-    dispatch<FetchTodoActions>({
+    dispatch<FetchTodoAction>({
       type: ActionTypes.fetchTodos,
       payload: respose.data,
     });
+  };
+};
+
+export const deleteTodo = (id: number): DeleteTodoAction => {
+  return {
+    type: ActionTypes.deleteTodo,
+    payload: id,
   };
 };
